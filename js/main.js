@@ -1,0 +1,10 @@
+import { initReducedToggle } from './motion.js';
+import { initEasing } from './easing.js';
+import { initRules } from './rules.js';
+import { initFeel } from './feel.js';
+import { initQuiz } from './quiz.js';
+initReducedToggle(document.getElementById('rm'));
+initEasing();
+initRules();
+initFeel();
+initQuiz();

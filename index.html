@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motion playground · UI Animation</title>
+<meta name="description" content="Try easing curves, durations, and the five do's and don'ts of UI motion.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#easing">Skip to the easing editor</a>
+<header class="bar">
+  <p class="brand">XD &amp; UI <span>Motion playground</span></p>
+  <nav aria-label="Sections">
+    <a href="#easing">Easing</a><a href="#rules">Do's and don'ts</a><a href="#duration">Duration test</a><a href="#quiz">Quiz</a>
+  </nav>
+  <label class="rm-toggle"><input type="checkbox" id="rm"> Reduce motion</label>
+</header>
+
+<main>
+<section id="easing" aria-labelledby="easing-h">
+  <h1 id="easing-h">Drag the curve. Watch the ball.</h1>
+  <p class="lede">An easing curve maps time (left to right) to progress (bottom to top). Drag the two yellow handles, then press Play. Steep parts move fast; flat parts move slowly.</p>
+
+  <div class="editor">
+    <div class="graph-wrap">
+      <svg id="graph" viewBox="-0.15 -0.55 1.3 2.1" role="img" aria-label="Cubic bezier graph. Use the handle buttons and arrow keys to move control points.">
+        <rect x="0" y="0" width="1" height="1" class="g-box"/>
+        <path id="g-grid" class="g-grid"/>
+        <line id="l1" class="g-arm"/><line id="l2" class="g-arm"/>
+        <path id="g-curve2" class="g-curve2"/>
+        <path id="g-curve" class="g-curve"/>
+        <circle id="h1" r="0.045" class="g-handle" tabindex="0" role="slider" aria-label="Handle 1 (x1, y1). Arrow keys move it."/>
+        <circle id="h2" r="0.045" class="g-handle" tabindex="0" role="slider" aria-label="Handle 2 (x2, y2). Arrow keys move it."/>
+        <text x="0" y="1.12" class="g-label">time</text>
+        <text x="-0.05" y="0" class="g-label" transform="rotate(-90 -0.05 0)" text-anchor="end">progress</text>
+      </svg>
+    </div>
+
+    <div class="controls">
+      <fieldset class="presets"><legend>Curve A presets</legend><div id="presets"></div></fieldset>
+      <label class="range">Duration <output id="dur-out">400 ms</output>
+        <input type="range" id="dur" min="50" max="2000" step="10" value="400"></label>
+      <label class="check"><input type="checkbox" id="cmp-on" checked> Compare with curve B</label>
+      <label class="sel">Curve B <select id="cmp"></select></label>
+      <div class="code">
+        <pre><code id="css-out"></code></pre>
+        <button type="button" id="copy" class="btn ghost">Copy CSS</button>
+        <span id="copy-msg" role="status" class="small"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tracks">
+    <div class="track"><span class="tlabel">A</span><div class="lane"><div class="ball a" id="ballA"></div></div></div>
+    <div class="track" id="trackB"><span class="tlabel">B</span><div class="lane"><div class="ball b" id="ballB"></div></div></div>
+    <button type="button" class="btn" id="play">Play</button>
+  </div>
+  <p class="small" id="spring-note" hidden>Spring is not a cubic-bezier. CSS draws it with <code>linear()</code>, a list of sampled points, so the handles are locked while it is selected.</p>
+</section>
+
+<section id="rules" aria-labelledby="rules-h">
+  <h2 id="rules-h">Five do's and don'ts</h2>
+  <p class="lede">Each rule has a working pair. Run both, change the numbers, and decide for yourself which one helps the user.</p>
+  <ol class="rules" id="rule-list"></ol>
+</section>
+
+<section id="duration" aria-labelledby="dur-h">
+  <h2 id="dur-h">Which one feels right?</h2>
+  <p class="lede">Same interaction, four speeds. Try each one, pick the speed that feels responsive without being abrupt, then check the answer.</p>
+  <div class="feel-tabs" role="radiogroup" aria-label="Interaction to test" id="feel-kind"></div>
+  <div class="feel-grid" id="feel-grid"></div>
+  <p class="feel-result" id="feel-result" role="status"></p>
+</section>
+
+<section id="quiz" aria-labelledby="quiz-h">
+  <h2 id="quiz-h">Check yourself</h2>
+  <p class="lede">Seven questions from the slides. You get feedback right after each answer.</p>
+  <form id="quiz-form"></form>
+  <p id="quiz-score" role="status" class="feel-result"></p>
+</section>
+</main>
+<footer><p>Made for BSEMC, WVSU CICT. Companion to the slides “UI Animation: Principles, Tools &amp; Examples.” Sources: NN/g on animation duration, Material 3 easing and duration, MDN on <code>prefers-reduced-motion</code>, WCAG 2.3.1 and 2.3.3.</p></footer>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
