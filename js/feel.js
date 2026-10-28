@@ -16,7 +16,7 @@ const KINDS = {
     stage.append(s);
   },
   'Modal': (stage, d) => {
-    const dl = document.createElement('div'); dl.className = 'dialog'; dl.style.opacity = 0; dl.style.position = 'absolute'; dl.innerHTML = '<p>Saved.</p>';
+    const dl = document.createElement('div'); dl.className = 'dialog'; dl.style.opacity = 0; dl.style.position = 'absolute'; dl.style.pointerEvents = 'none'; dl.innerHTML = '<p>Saved.</p>';
     const b = document.createElement('button'); b.type = 'button'; b.className = 'btn'; b.textContent = 'Open';
     b.onclick = () => { play(dl, [{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], { duration: d, easing: 'cubic-bezier(.2,0,0,1)' });
       setTimeout(() => play(dl, [{ opacity: 1 }, { opacity: 0 }], { duration: Math.min(d, 200) }), d + 900); };
